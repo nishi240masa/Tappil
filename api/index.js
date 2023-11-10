@@ -8,14 +8,14 @@ const port = process.env.PORT || 3000;
 const mysql = require('mysql');
 
 // sqlにデータを入れる為の変数
-const sql = 'INSERT INTO users SET ?';
+const sql = 'INSERT INTO data SET ?';
 
 // ファイルシステムを読み込み
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'N04090411n%',
-    database: 'express_db'
+    database: 'keydata_db'
 });
 
 con.connect(function (err) {
@@ -33,7 +33,11 @@ app.post('/api/data', (req, res) => {
 
     let name_data = req.body.name;
 
-    let email_data = req.body.email;
+    let key_data = req.body.keycount;
+    let enter_data = req.body.entercount;
+    let back_data = req.body.backcount;
+    let sec_data = req.body.seconds;
+
 
     res.status(200).json({
         mesage: "ok"
@@ -41,14 +45,13 @@ app.post('/api/data', (req, res) => {
 
     con.query(
         sql,
-        { name: name_data, email: email_data },
+        { name: name_data, keycount: key_data, entercount: enter_data, backcount: back_data, seconds: sec_data},
         function (err, result, fields) {
           if (err) throw err;
           console.log(result);
         }
       );
 });
-
 
 
 app.get('/api/gif', (req, res) => {
