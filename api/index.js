@@ -4,14 +4,34 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const mysql = require('mysql');
+
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'N04090411n%',
+    database: 'express_db'
+  });
+  con.connect(function (err) {
+    if (err) throw err;
+    console.log('Connected');
+  });
+
 app.use(bodyParser.json());
 
 
 
 app.post('/api/data', (req, res) => {
 
-    res.json({ message: 'success' });
+    console.log(req.body);
+
+    res.status(200).json({
+        mesage: "ok"
+    });
+
 });
+
+
 
 app.get('/api/gif', (req, res) => {
     // サーバー上のGIF画像を読み込み、ブラウザに送信
