@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -6,8 +7,10 @@ const port = process.env.PORT || 3000;
 
 const mysql = require('mysql');
 
+// sqlにデータを入れる為の変数
 const sql = 'INSERT INTO users SET ?';
 
+// ファイルシステムを読み込み
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -20,8 +23,10 @@ con.connect(function (err) {
     console.log('Connected');
 });
 
+// body-parserを使う設定
 app.use(bodyParser.json());
 
+// postされたデータを受け取る設定
 app.post('/api/data', (req, res) => {
 
     console.log(req.body);
@@ -43,12 +48,6 @@ app.post('/api/data', (req, res) => {
         }
       );
 });
-
-
-
-
-
-
 
 
 

@@ -46,17 +46,17 @@ export function activate(context: vscode.ExtensionContext) {
     const onDidChangeTextDocument = vscode.workspace.onDidChangeTextDocument((event) => {
         const text = event.contentChanges[0]?.text;
         if (/[a-zA-Z0-9]/.test(text)) {
-            keyCount++;
+            keyCount++; // キーを押した回数をカウント
         }
         if (text === '\n') {
-            enter++;
+            enter++;  // エンターキーを押した回数をカウント
         }
         if (text === '') {
-            BackCount++;
+            BackCount++;  // バックスペースキーを押した回数をカウント
         }
     });
 	vscode.commands.registerCommand('vscode-Keys.showKeyCount', () => {
-            const seconds = (totalCursorTimeInMilliseconds).toFixed(2);
+            const seconds = (totalCursorTimeInMilliseconds).toFixed(2); // カーソルがエディタ上にあった時間を小数点以下2桁まで表示
             vscode.window.showInformationMessage(`キーを ${keyCount} 回押しました。エンターキーを ${enter} 回押しました。バックスペースキーを ${BackCount} 回押しました。マウスカーソルがエディタ上にあった時間: ${seconds} 秒`);
 		}
         )
