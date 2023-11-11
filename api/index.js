@@ -1,5 +1,7 @@
 
-// apiとmysqlは繋げてある　拡張機能からpostをゲットしたい　拡張機能のデバック意味不明
+// import と export ができなかったので、require と module.exports で代用したができない
+
+var gif_nam = require('.scor.js');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,7 +9,15 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const mysql = require('mysql');
+const mysql = require('api/scor.js');
+
+// ファイルシステムを読み込み
+const fs = require('fs');
+const { request } = require('http');
+
+//corsを使う設定
+app.use(cors());
+
 
 // sqlにデータを入れる為の変数
 const sql = 'INSERT INTO data SET ?';
@@ -56,7 +66,21 @@ app.post('/api/data', (req, res) => {
 });
 
 
+
+// dbからデータを取得する設定 nameがwwのデータを取得
+con.query("SELECT name FROM data WHERE", function (err, result, fields,gif_nam) {
+    if (err) throw err;
+    console.log(result);
+    // console.log(result[0].keycount);
+
+    
+    gif_nam.gif_nam(result[0].name);
+
+  });
+
 app.get('/api/gif', (req, res) => {
+
+ 
     // サーバー上のGIF画像を読み込み、ブラウザに送信
     fs.readFile(gifPath, (err, data) => {
         if (err) {
