@@ -1,4 +1,6 @@
 
+// apiとmysqlは繋げてある　拡張機能からpostをゲットしたい　拡張機能のデバック意味不明
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
