@@ -13,14 +13,8 @@
 //     }
 // };
 
-
-exports.gifn = function (req) {
-    // if (req == "ww") {
-    //     return "ok";
-    // } else {
-    //     return "error";
-
-    // }
+// dbからのnameとseconds,keycountを取得したやつと、userの名前を比較して、同じ名前のデータを条件分岐でgif_dataの値を返す
+exports.gifn = function (req,user) {
 
     let key_data = 0;
     let time_data = 0;
@@ -35,7 +29,7 @@ exports.gifn = function (req) {
 
     console.log(req);
     for (i = 0; i < req.length; i++) {
-        if (req[i].name == "ww") {
+        if (req[i].name == user) {
             console.log("for");
             console.log(req[i]);
             key_data += req[i].keycount;
@@ -65,10 +59,19 @@ exports.gifn = function (req) {
 
 }
 
-// test = function(){
-//   return"test";
-// };
+exports.gif_send = function (req) { 
 
-// module.exports = {test};
-
+    if(req == 5){
+        return "gif/five_gif.gif";
+    }else if(req == 4){
+        return "gif/forr_gif.gif";
+    }else if(req == 3){
+        return "gif/three_gif.gif";
+    }else if(req == 2){
+        return "gif/two_gif.gif";
+    }else{
+        return "gif/one_gif.gif";
+    }
+    
+}
 
