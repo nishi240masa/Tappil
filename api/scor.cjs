@@ -1,17 +1,33 @@
 
-exports.gif_nam = function(req, res){
+// exports.gifn= function(req, res){
 
+//     if(req == "ww"){
+//         res.status(200).json({
+//             mesage: "ok"
+
+//         });
+
+//     }else{
+//         console.log("error");
+
+//     }
+// };
+
+
+exports.gifn = function(req){
     if(req == "ww"){
-        res.status(200).json({
-            mesage: "ok"
-
-        });
-
+        return "ok";
     }else{
-        console.log("error");
+        return "error";
 
     }
-};
+}
+
+// test = function(){
+//   return"test";
+// };
+
+// module.exports = {test};
 
 // let key_data = 0;
 // let time_data = 0;
