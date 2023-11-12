@@ -64,12 +64,13 @@ app.post('/api/data', (req, res) => {
 
 
 // dbからデータを取得する設定 nameがwwのデータを取得
-con.query("SELECT name FROM data WHERE name = 'ww'", function (err, result, fields,gif_nam) {
+con.query("SELECT name FROM data /*WHERE name = 'ww */", function (err, result, fields,gif_nam) {
     if (err) throw err;
     console.log(result);
 
-
-    console.log(gifn(result[0].name));
+    for(i = 0; i < result.length; i++){
+    console.log(gifn(result[i].name));
+    }
     // gn.func();
     // console.log(result[0].keycount);
 
