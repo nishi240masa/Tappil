@@ -1,18 +1,24 @@
 
-// apiとmysqlは繋げてある　拡張機能からpostをゲットしたい　拡張機能のデバック意味不明
+// import と export ができなかったので、require と module.exports で代用したができない
+const { gifn } = require('./scor.cjs');
+// import  {gifn}  from './scor.cjs';
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
+// ファイルシステムを読み込み
+const fs = require('fs');
+const { request } = require('http');
+//corsを使う設定
+app.use(cors());
+
+// const gn = ('./scor.js');
 
 const mysql = require('mysql');
-
 // sqlにデータを入れる為の変数
 const sql = 'INSERT INTO data SET ?';
-
-// ファイルシステムを読み込み
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -56,7 +62,26 @@ app.post('/api/data', (req, res) => {
 });
 
 
+
+// dbからデータを取得する設定 nameがwwのデータを取得
+con.query("SELECT name FROM data /*WHERE name = 'ww */", function (err, result, fields,gif_nam) {
+    if (err) throw err;
+    console.log(result);
+
+    for(i = 0; i < result.length; i++){
+    console.log(gifn(result[i].name));
+    }
+    // gn.func();
+    // console.log(result[0].keycount);
+
+    // console.log( gn.gifn(result[0].name));
+    // gifnamber.gn(result[0].name);
+
+});
+
 app.get('/api/gif', (req, res) => {
+
+ 
     // サーバー上のGIF画像を読み込み、ブラウザに送信
     fs.readFile(gifPath, (err, data) => {
         if (err) {
