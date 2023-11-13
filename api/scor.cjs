@@ -1,18 +1,4 @@
 
-// exports.gifn= function(req, res){
-
-//     if(req == "ww"){
-//         res.status(200).json({
-//             mesage: "ok"
-
-//         });
-
-//     }else{
-//         console.log("error");
-
-//     }
-// };
-
 // dbからのnameとseconds,keycountを取得したやつと、userの名前を比較して、同じ名前のデータを条件分岐でgif_dataの値を返す
 exports.gifn = function (req,user) {
 
@@ -70,8 +56,34 @@ exports.gif_send = function (req) {
     }else if(req == 2){
         return "gif/two_gif.gif";
     }else{
-        return "gif/one_gif.gif";
+        return "gif/saru.gif";
     }
     
 }
 
+exports.mydata = function (req) {
+
+    let best_score = 0;
+    let best_time = 0;
+    let best_keycount = 0;
+    let best_entercount = 0;
+    let best_backcount = 0;
+
+    exports.bestsc = function (req, user) {
+        for (i = 0; i < req.length; i++) {
+            if (req[i].name == user) {
+                best_score = req[i].keycount / req[i].seconds;
+            }
+        }
+        return best_score;
+    }
+    exports.bestti = function (req, user) {
+        for (i = 0; i < req.length; i++) {
+            if (req[i].name == user) {
+                best_time = req[i].seconds;
+            }
+        }
+        return best_time;
+    }
+
+}

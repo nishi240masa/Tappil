@@ -1,8 +1,11 @@
 
 // import と export ができなかったので、require と module.exports で代用したができない
-const { gifn, gif_send } = require('./scor.cjs');
+const { gifn, gif_send,mydata,bestsc } = require('./scor.cjs');
 // import  {gifn}  from './scor.cjs';
+const { svgData } = require('./svg.cjs');
 
+const { createCanvas } = require('canvas');
+const SVG = require('svg-canvas');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -46,6 +49,8 @@ app.post('/api/data', (req, res) => {
     let back_data = req.body.backcount;
     let sec_data = req.body.seconds;
 
+    let score_data = key_data / sec_data;
+
 
     res.status(200).json({
         mesage: "ok"
@@ -53,7 +58,7 @@ app.post('/api/data', (req, res) => {
 
     con.query(
         sql,
-        { name: name_data, keycount: key_data, entercount: enter_data, backcount: back_data, seconds: sec_data },
+        { name: name_data, keycount: key_data, entercount: enter_data, backcount: back_data, seconds: sec_data ,score:score_data},
         function (err, result, fields) {
             if (err) throw err;
             console.log(result);
@@ -62,6 +67,7 @@ app.post('/api/data', (req, res) => {
 });
 
 
+// gif画像を返すapi
 app.get('/api/gif', (req, res) => {
     let user = req.query.name;
     // dbからデータを取得する設定 nameがwwのデータを取得
@@ -98,5 +104,55 @@ app.get('/api/gif', (req, res) => {
         });
     });
 });
+
+con.query("SELECT name, keycount FROM data ORDER BY keycount DESC", function (err, result) {
+    if (err) throw err;
+    console.log("test");
+    for (i = 0; i < result.length; i++) {
+        if (result[i].name == "ww") {
+            console.log(result[i]);
+        }
+    }
+    console.log(result);
+
+
+});
+
+let test_name = "ww";
+con.query("SELECT name,keycount,score,seconds FROM data WHERE name = ? ORDER BY keycount DESC",[test_name], function (err, result) {
+    if (err) throw err;
+
+    console.log("test2");
+    console.log(result);
+
+    gif_nam = gifn(result, "ww");
+
+    console.log(gif_nam);
+
+});
+app.get('/api/myscore', (req, res) => {
+
+    let user = req.query.name;
+
+    // dbからデータを取得する設定 nameがwwのデータを取得
+    con.query("SELECT * FROM data WHERE name = ? ",[user], function (err, result) {
+        if (err) throw err;
+
+        console.log("svg_test");
+        console.log(result);
+
+
+        console.log(result.score);
+
+        svg = svgData(result, user);
+
+        res.type('svg').send(svg);
+
+
+    });
+
+});
+
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
