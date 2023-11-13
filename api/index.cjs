@@ -105,31 +105,7 @@ app.get('/api/gif', (req, res) => {
     });
 });
 
-con.query("SELECT name, keycount FROM data ORDER BY keycount DESC", function (err, result) {
-    if (err) throw err;
-    console.log("test");
-    for (i = 0; i < result.length; i++) {
-        if (result[i].name == "ww") {
-            console.log(result[i]);
-        }
-    }
-    console.log(result);
-
-
-});
-
-let test_name = "ww";
-con.query("SELECT name,keycount,score,seconds FROM data WHERE name = ? ORDER BY keycount DESC",[test_name], function (err, result) {
-    if (err) throw err;
-
-    console.log("test2");
-    console.log(result);
-
-    gif_nam = gifn(result, "ww");
-
-    console.log(gif_nam);
-
-});
+// svg画像を返すapi
 app.get('/api/myscore', (req, res) => {
 
     let user = req.query.name;
