@@ -54,7 +54,7 @@ exports.gif_send = function (req) {
     }else if(req == 3){
         return "gif/three_gif.gif";
     }else if(req == 2){
-        return "gif/two_gif.gif";
+        return "gif/haniwa.gif";
     }else{
         return "gif/saru.gif";
     }
