@@ -45,21 +45,46 @@ exports.svgData = function (req, user) {
 
     const scoreValue4 = scoreOll || '0';
 
-    const canvas = createCanvas(400, 200);
-    const ctx = canvas.getContext('2d');
+    // const canvas = createCanvas(400, 200);
+    // const ctx = canvas.getContext('2d');
 
-    ctx.font = '20px Arial';
-    ctx.fillStyle = 'black';
+    // ctx.font = '20px Arial';
+    // ctx.fillStyle = 'black';
 
-    ctx.fillText(`User: ${username}`, 10, 30);
+    // ctx.fillText(`User: ${username}`, 10, 30);
 
-    ctx.fillText(`最大スコア: ${scoreValue1}`, 10, 60);
-    ctx.fillText(`最大タップ数: ${scoreValue2}`, 10, 90);
-    ctx.fillText(`最大作業時間: ${scoreValue3}`, 10, 120);
-    ctx.fillText(`累計スコア: ${scoreValue4}`, 10, 150);
+    // ctx.fillText(`最大スコア: ${scoreValue1}`, 10, 60);
+    // ctx.fillText(`最大タップ数: ${scoreValue2}`, 10, 90);
+    // ctx.fillText(`最大作業時間: ${scoreValue3}`, 10, 120);
+    // ctx.fillText(`累計スコア: ${scoreValue4}`, 10, 150);
 
-     const svg_data = canvas.toDataURL('image/svg+xml');
 
-    return svg_data;
+    const scores = [
+        { name: "最大スコア", value: scoreValue1 },
+        { name: "最大タップ数", value: scoreValue2 },
+        { name: "最大作業時間", value: scoreValue3 },
+        { name: "累計スコア", value: scoreValue4 }
+      ];
+
+
+    const svgString = `
+    <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- 背景 -->
+      <rect width="100%" height="100%" fill="#f0f0f0"/>
+
+      <!-- ユーザー名 -->
+      <text x="50" y="30" font-family="Arial" font-size="16" fill="black">User: ${user}</text>
+
+      <!-- スコア -->
+      ${scores.map((score, index) => `
+        <text x="50" y="${60 + index * 30}" font-family="Arial" font-size="16" fill="black">${score.name}: ${score.value}</text>
+      `).join('')}
+
+    </svg>
+  `;
+    //  const svg_data = canvas.toDataURL('image/svg+xml');
+
+    return svgString;
 
 }

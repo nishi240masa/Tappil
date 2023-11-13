@@ -146,6 +146,7 @@ app.get('/api/myscore', (req, res) => {
 
         svg = svgData(result, user);
 
+        res.set('Content-Type', 'image/svg+xml');
         res.type('svg').send(svg);
 
 
