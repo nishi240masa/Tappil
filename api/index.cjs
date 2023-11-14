@@ -49,6 +49,7 @@ const con = new Pool({
 con.connect();
 
 
+
 con.query(`CREATE TABLE IF NOT EXISTS data (
     id SERIAL NOT NULL ,
     name varchar(255) NOT NULL,
@@ -56,10 +57,12 @@ con.query(`CREATE TABLE IF NOT EXISTS data (
     entercount  int NOT NULL,
     backcount  int NOT NULL,
     seconds decimal(65,2) NOT NULL,
-    dt datetime DEFAULT CURRENT_TIMESTAMP,
+    dt timestamp WITH TIME ZONE  DEFAULT CURRENT_TIMESTAMP ,
     score decimal(65,2) DEFAULT NULL,
     PRIMARY KEY (id)
   )`);
+
+con.query('SET SESSION timezone TO "Asia/Tokyo"');
 // body-parserを使う設定
 app.use(bodyParser.json());
 
