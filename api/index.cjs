@@ -23,8 +23,8 @@ app.use(cors());
 // const gn = ('./scor.js');
 
 const mysql = require('mysql');
-// sqlにデータを入れる為の変数
-const sql = 'INSERT INTO data SET ?';
+
+
 
 // mysqlに接続する設定
 // const con = mysql.createConnection({
@@ -84,6 +84,21 @@ app.post('/api/data', (req, res) => {
     res.status(200).json({
         mesage: "ok"
     });
+
+    const sql = `INSERT INTO data (
+        name,
+        keycount,
+        entercount,
+        backcount,
+        seconds
+    )VALUES(
+        '${name_data}',
+        ${key_data},
+        ${enter_data},
+        ${back_data},
+        ${sec_data}
+        )
+        `;
 
     con.query(
         sql,
