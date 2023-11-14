@@ -1,12 +1,12 @@
 
 // import と export ができなかったので、require と module.exports で代用したができない
-const { gifn, gif_send,mydata,bestsc } = require('./scor.cjs');
+const { gifn, gif_send, mydata, bestsc } = require('./scor.cjs');
 // import  {gifn}  from './scor.cjs';
 const { svgData } = require('./svg.cjs');
 
 require('dotenv').config();
 
-const {Pool} = require('pg');
+const { Pool } = require('pg');
 const { createCanvas } = require('canvas');
 const SVG = require('svg-canvas');
 const express = require('express');
@@ -39,8 +39,8 @@ const mysql = require('mysql');
 // });
 
 const con = new Pool({
-    user: process.env.DB_USER,   
-    host: process.env.DB_HOST||process.env.DB_,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST || process.env.DB_,
     database: process.env.DB_DATABASE,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
@@ -81,9 +81,7 @@ app.post('/api/data', (req, res) => {
     let score_data = key_data / sec_data;
 
 
-    res.status(200).json({
-        mesage: "ok"
-    });
+
 
     const sql = `INSERT INTO data (
         name,
@@ -99,15 +97,28 @@ app.post('/api/data', (req, res) => {
         ${sec_data}
         )
         `;
-
+    console.log(sql);
     con.query(
         sql,
-        { name: name_data, keycount: key_data, entercount: enter_data, backcount: back_data, seconds: sec_data ,score:score_data},
+        { name: name_data, keycount: key_data, entercount: enter_data, backcount: back_data, seconds: sec_data, score: score_data },
         function (err, result, fields) {
-            if (err) throw err;
-            console.log(result);
+            if (err) {
+                console.log(err);
+                res.status(500).json({
+                    mesage: "err",
+                    err: err
+                });
+            } else {
+                console.log(result);
+                console.log("成功");
+                res.status(200).json({
+                    mesage: "ok"
+                });
+
+            }
         }
     );
+
 });
 
 
@@ -155,7 +166,7 @@ app.get('/api/myscore', (req, res) => {
     let user = req.query.name;
 
     // dbからデータを取得する設定 nameがwwのデータを取得
-    con.query("SELECT * FROM data WHERE name = ? ",[user], function (err, result) {
+    con.query("SELECT * FROM data WHERE name = ? ", [user], function (err, result) {
         if (err) throw err;
 
         console.log("svg_test");
