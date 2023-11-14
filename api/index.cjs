@@ -4,6 +4,8 @@ const { gifn, gif_send,mydata,bestsc } = require('./scor.cjs');
 // import  {gifn}  from './scor.cjs';
 const { svgData } = require('./svg.cjs');
 
+
+const {Pool} = require('pg');
 const { createCanvas } = require('canvas');
 const SVG = require('svg-canvas');
 const express = require('express');
@@ -22,18 +24,41 @@ app.use(cors());
 const mysql = require('mysql');
 // sqlにデータを入れる為の変数
 const sql = 'INSERT INTO data SET ?';
-const con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'N04090411n%',
-    database: 'keydata_db'
+
+// mysqlに接続する設定
+// const con = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'N04090411n%',
+//     database: 'keydata_db'
+// });
+// con.connect(function (err) {
+//     if (err) throw err;
+//     console.log('Connected');
+// });
+
+const con = new Pool({
+    user: process.env.DB_USER,   
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
 });
 
-con.connect(function (err) {
-    if (err) throw err;
-    console.log('Connected');
-});
+con.connect();
 
+
+con.query(`CREATE TABLE IF NOT EXISTS data (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    keycount int NOT NULL,
+    entercount  int NOT NULL,
+    backcount  int NOT NULL,
+    seconds decimal(65,2) NOT NULL,
+    dt datetime DEFAULT CURRENT_TIMESTAMP,
+    score decimal(65,2) DEFAULT NULL,
+    PRIMARY KEY (id)
+  )`);
 // body-parserを使う設定
 app.use(bodyParser.json());
 
