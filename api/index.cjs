@@ -100,7 +100,6 @@ app.post('/api/data', (req, res) => {
     console.log(sql);
     con.query(
         sql,
-        { name: name_data, keycount: key_data, entercount: enter_data, backcount: back_data, seconds: sec_data, score: score_data },
         function (err, result, fields) {
             if (err) {
                 console.log(err);
