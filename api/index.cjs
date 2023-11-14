@@ -4,6 +4,7 @@ const { gifn, gif_send,mydata,bestsc } = require('./scor.cjs');
 // import  {gifn}  from './scor.cjs';
 const { svgData } = require('./svg.cjs');
 
+require('dotenv').config();
 
 const {Pool} = require('pg');
 const { createCanvas } = require('canvas');
@@ -39,7 +40,7 @@ const sql = 'INSERT INTO data SET ?';
 
 const con = new Pool({
     user: process.env.DB_USER,   
-    host: process.env.DB_HOST,
+    host: process.env.DB_HOST||process.env.DB_,
     database: process.env.DB_DATABASE,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
@@ -49,7 +50,7 @@ con.connect();
 
 
 con.query(`CREATE TABLE IF NOT EXISTS data (
-    id int NOT NULL AUTO_INCREMENT,
+    id int SERIAL NOT NULL ,
     name varchar(255) NOT NULL,
     keycount int NOT NULL,
     entercount  int NOT NULL,
