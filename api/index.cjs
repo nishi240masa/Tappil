@@ -50,7 +50,7 @@ con.connect();
 
 
 con.query(`CREATE TABLE IF NOT EXISTS data (
-    id int SERIAL NOT NULL ,
+    id SERIAL NOT NULL ,
     name varchar(255) NOT NULL,
     keycount int NOT NULL,
     entercount  int NOT NULL,
