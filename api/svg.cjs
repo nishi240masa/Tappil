@@ -82,9 +82,9 @@ exports.svgData = function (req, user) {
         <text x="50" y="${60 + index * 30}" font-family="Arial" font-size="16" fill="black">${score.name}: ${score.value}</text>
       `).join('')}
 
-      <foreignObject width="100%" height="100%">
+      <foreignObject width="300%" height="80%">
       <div xmlns="http://www.w3.org/1999/xhtml">
-          <img src="gif/five_gif.gif" alt="GIF" style="width:20%; height:20%;" />
+          <img src="gif/five_gif.gif" alt="GIF" style="width:20%; height:100%;" />
       </div>
   </foreignObject>
 
