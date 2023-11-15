@@ -171,7 +171,7 @@ app.get('/api/myscore', (req, res) => {
         if (err) throw err;
 
         console.log("svg_test");
-        console.log(result);
+        console.log(result.rows);
 
 
         console.log(result.score);
