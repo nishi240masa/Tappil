@@ -188,7 +188,9 @@ app.get('/api/myscore', (req, res) => {
 
 app.get('/gif', (req, res) => {
 
-fs.fdatasync('gif/five_gif.gif', (err, data) => {
+    // サーバー上のGIF画像を読み込み、ブラウザに送信
+    gif =gif/robo.gif;
+fs.fdatasync(gif, (err, data) => {
     if (err) { 
         console.error(err);
         res.status(500).send('Internal Server Error');
