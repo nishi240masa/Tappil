@@ -89,7 +89,8 @@ app.post('/api/data', (req, res) => {
         keycount,
         entercount,
         backcount,
-        seconds
+        seconds,
+        score
     )VALUES(
         '${name_data}',
         ${key_data},
