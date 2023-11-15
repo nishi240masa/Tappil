@@ -12,13 +12,13 @@ exports.svgData = function (req, user) {
 
     console.log("test");
 
-    for (i = 0; i < req.length; i++) {
+    for (i = 0; i < req.rows.length; i++) {
 
-        sco.push(req[i].score);
+        sco.push(req.rows[i].score);
 
-        keyco.push(req[i].keycount);
+        keyco.push(req.rows[i].keycount);
 
-        sec.push(req[i].seconds);
+        sec.push(req.rows[i].seconds);
     }
     sco.sort((a, b) => a - b);
     scoreMax = sco[0];
