@@ -2,11 +2,11 @@
 // import と export ができなかったので、require と module.exports で代用したができない
 const { gifn, gif_send, mydata, bestsc } = require('./scor.cjs');
 // import  {gifn}  from './scor.cjs';
-const { svgData } = require('./svg.cjs');
+
 
 require('dotenv').config();
 
-const svg2gif = require('svg2gif');
+const svgToImage = require('svg-to-image');
 
 const { Pool } = require('pg');
 const { createCanvas } = require('canvas');
@@ -180,19 +180,17 @@ app.get('/api/myscore', (req, res) => {
 
         let svg = svgData(result, user);
 
-        svg2gif(svg, { filename: 'score.gif', width: 400, height: 200 }, (err) => {
-            if (err) {
-                console.error('SVGをGIFに変換する際にエラーが発生しました:', err);
-                res.status(500).send('内部サーバーエラー');
-            } else {
-                // GIFをレスポンスで送信
-                res.sendFile('score.gif', { root: __dirname });
-            }
-        });
-    });
+        const svgBuffer = Buffer.from(svg, 'utf-8');
+        const image = svgToImage(svgBuffer, { format: 'gif', width: 400, height: 200 });
+
+        fs.writeFileSync('combined.gif', image.data, 'base64');
+
+        res.sendFile('combined.gif', { root: __dirname });
 
     // res.set('Content-Type', 'image/svg+xml');
     // res.type('svg').send(svg);
+    
+        });
 
 
 });
