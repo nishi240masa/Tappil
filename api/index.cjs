@@ -127,7 +127,7 @@ app.post('/api/data', (req, res) => {
 app.get('/api/gif', (req, res) => {
     let user = req.query.name;
     // dbからデータを取得する設定 nameがwwのデータを取得
-    con.query("SELECT name,seconds,keycount FROM data /*WHERE name = 'ww */", function (err, result) {
+    con.query("SELECT name,seconds,keycount FROM data", function (err, result) {
         if (err) throw err;
         console.log(result);
 
