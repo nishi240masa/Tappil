@@ -68,7 +68,17 @@ exports.svgData = function (req, user) {
         { name: "累計スコア", value: scoreValue4 }
       ];
 
-      gif = fs.readFile('gif/five_gif.gif');
+      let gif 
+    fs.readFile('gif/five_gif.gif', (err, data) => {
+      if (err) { 
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+      }else{
+        console.log(data);
+        gif = data;
+      }
+    });
+  
 
     const svgString = `
     <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
