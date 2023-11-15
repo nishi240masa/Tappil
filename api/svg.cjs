@@ -37,13 +37,13 @@ exports.svgData = function (req, user) {
 
     const username = user || 'User';
 
-    const scoreValue1 = scoreMax || '0';
+    const scoreValue1 = scoreMax || 'null';
 
-    const scoreValue2 = keycountMax || '0';
+    const scoreValue2 = keycountMax || 'null';
 
-    const scoreValue3 = secondsMax || '0';
+    const scoreValue3 = secondsMax || 'null';
 
-    const scoreValue4 = scoreOll || '0';
+    const scoreValue4 = scoreOll || 'null';
 
     // const canvas = createCanvas(400, 200);
     // const ctx = canvas.getContext('2d');
