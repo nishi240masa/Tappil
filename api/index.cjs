@@ -99,8 +99,7 @@ app.post('/api/data', (req, res) => {
         `;
     console.log(sql);
     con.query(
-        sql,
-        function (err, result, fields) {
+        sql, function (err, result) {
             if (err) {
                 console.log(err);
                 res.status(500).json({
