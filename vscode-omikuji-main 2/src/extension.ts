@@ -18,6 +18,7 @@ async function promptForName(name: string | undefined) {
 }
 
 
+
 const data = JSON.stringify({
     text: "text",
   });
@@ -35,6 +36,7 @@ let isVsCodeActive = true; // VSCodeウィンドウがアクティブかどう�
 const activeEditor = vscode.window.activeTextEditor;
 
 export function activate(context: vscode.ExtensionContext) {
+    context.subscriptions.push(vscode.commands.registerCommand('extension.promptForName',promptForName));
 	context.subscriptions.push(
         vscode.commands.registerCommand('vscode-Keys.Start', () => {
     // ウィンドウのフォーカス状態が変化したときに呼び出されるイベント
