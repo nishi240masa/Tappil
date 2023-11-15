@@ -49,9 +49,9 @@ exports.gifn = function (req,user) {
 exports.gif_send = function (req) { 
 
     if(req == 5){
-        return "gif/five_gif.gif";
+        return "gif/robo.gif";
     }else if(req == 4){
-        return "gif/forr_gif.gif";
+        return "gif/gunjin.gif";
     }else if(req == 3){
         return "gif/samurai.gif";
     }else if(req == 2){
