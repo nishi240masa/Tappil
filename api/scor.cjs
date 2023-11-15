@@ -25,7 +25,7 @@ exports.gifn = function (req,user) {
     }
 
     console.log(key_data);
-    time_data = parseFloat(time_data.toFixed(2));
+
     console.log(time_data);
 
     score_data = key_data / time_data;
