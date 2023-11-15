@@ -6,6 +6,8 @@ const { svgData } = require('./svg.cjs');
 
 require('dotenv').config();
 
+const svg2gif = require('svg2gif');
+
 const { Pool } = require('pg');
 const { createCanvas } = require('canvas');
 const SVG = require('svg-canvas');
@@ -176,29 +178,39 @@ app.get('/api/myscore', (req, res) => {
 
         console.log(result.score);
 
-        svg = svgData(result, user);
+        let svg = svgData(result, user);
 
-        res.set('Content-Type', 'image/svg+xml');
-        res.type('svg').send(svg);
-
-
+        svg2gif(svg, { filename: 'score.gif', width: 400, height: 200 }, (err) => {
+            if (err) {
+                console.error('SVGをGIFに変換する際にエラーが発生しました:', err);
+                res.status(500).send('内部サーバーエラー');
+            } else {
+                // GIFをレスポンスで送信
+                res.sendFile('score.gif', { root: __dirname });
+            }
+        });
     });
 
+    // res.set('Content-Type', 'image/svg+xml');
+    // res.type('svg').send(svg);
+
+
 });
+
 
 app.get('/gif', (req, res) => {
 
     // サーバー上のGIF画像を読み込み、ブラウザに送信
     let gif_data = 'gif/robo.gif';
-fs.readFile(gif_data, (err, data) => {
-    if (err) { 
-        console.error(err);
-        res.status(500).send('Internal Server Error');
-    }else{
-        res.header('Content-Type', 'image/gif');
-        res.status(200).send(data);
-    }
-});
-}) 
+    fs.readFile(gif_data, (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        } else {
+            res.header('Content-Type', 'image/gif');
+            res.status(200).send(data);
+        }
+    });
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
