@@ -31,8 +31,8 @@ exports.svgData = function (req, user) {
     secondsMax = sec[0];
 
     let scoreOll = 0;
-    for (i = 0; i < req.length; i++) {
-        scoreOll += req[i].score;
+    for (i = 0; i < req.rows.length; i++) {
+        scoreOll += req.rows[i].score;
     }
 
 
