@@ -2,6 +2,21 @@ import * as vscode from 'vscode';
 import * as https from "https";
 import * as http from "http";
 
+let name = "";
+
+async function promptForName(name: string | undefined) {
+     name = await vscode.window.showInputBox({
+        prompt: 'Please enter your name',
+        placeHolder: 'Your Name'
+    });
+    if (name) {
+        vscode.window.showInformationMessage(`Hello, ${name}!`);
+    } else {
+        vscode.window.showWarningMessage('No name entered.');
+    }
+    //nameに入力された文字列入ってる
+}
+
 
 const data = JSON.stringify({
     text: "text",
@@ -72,7 +87,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 
             const datas = {
-                "name": "test", 
+                "name": name, 
                   "keycount": keyCount, 
                   "entercount": enter,
                    "backcount": BackCount, 
