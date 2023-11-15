@@ -84,7 +84,7 @@ exports.svgData = function (req, user) {
 
       <foreignObject width="100%" height="100%">
       <div xmlns="http://www.w3.org/1999/xhtml">
-          <img src="gif/five_gif.gif" alt="GIF" style="width:100%; height:100%;" />
+          <img src="gif/five_gif.gif" alt="GIF" style="width:20%; height:20%;" />
       </div>
   </foreignObject>
 
