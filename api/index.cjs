@@ -183,12 +183,21 @@ app.get('/api/myscore', (req, res) => {
         let svg = svgData(result, user);
 
         const svgBuffer = Buffer.from(svg, 'utf-8');
-        const image = svgToImage(svgBuffer, { format: 'gif', width: 400, height: 200 });
-
-        fs.writeFileSync('combined.gif', image.data, 'base64');
-
-        res.sendFile('combined.gif', { root: __dirname });
-
+        try {
+            const image = svgToImage(svgBuffer, { format: 'gif', width: 400, height: 200 });
+            if (image && image.data) {
+                // GIFファイルを保存
+                fs.writeFileSync('combined.gif', image.data, 'base64');
+    
+                // GIFをレスポンスで送信
+                res.sendFile('combined.gif', { root: __dirname });
+            } else {
+                res.status(500).send('SVGからGIFへの変換に失敗しました。');
+            }
+        } catch (error) {
+            console.error('SVGからGIFへの変換エラー:', error);
+            res.status(500).send('内部サーバーエラー');
+        }
     // res.set('Content-Type', 'image/svg+xml');
     // res.type('svg').send(svg);
     
