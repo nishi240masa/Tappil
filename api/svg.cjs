@@ -67,6 +67,7 @@ exports.svgData = function (req, user) {
         { name: "累計スコア", value: scoreValue4 }
       ];
 
+      gif = fs.readFile('gif/five_gif.gif');
 
     const svgString = `
     <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +85,7 @@ exports.svgData = function (req, user) {
 
       <foreignObject width="300%" height="80%">
       <div xmlns="http://www.w3.org/1999/xhtml">
-          <img src="/gif/five_gif.gif" alt="GIF" style="width:20%; height:100%;" />
+          <img src="${gif}" alt="GIF" style="width:20%; height:100%;" />
       </div>
   </foreignObject>
 
