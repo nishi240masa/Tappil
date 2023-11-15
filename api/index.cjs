@@ -69,7 +69,7 @@ app.use(bodyParser.json());
 // postされたデータを受け取る設定
 app.post('/api/data', (req, res) => {
 
-    console.log(req.body);
+    console.log("test"+req.body);
 
     let name_data = req.body.name;
 
