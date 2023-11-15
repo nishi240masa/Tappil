@@ -3,8 +3,8 @@ const { createCanvas } = require('canvas');
 const SVG = require('svg-canvas');
 
 exports.svgData = function (req, user) {
-
-
+  console.log("test_svg");
+  console.log(req);
     let sco = [];
     let keyco = [];
     let sec = [];
