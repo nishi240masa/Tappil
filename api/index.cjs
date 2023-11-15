@@ -7,7 +7,7 @@ const { gifn, gif_send, mydata, bestsc } = require('./scor.cjs');
 require('dotenv').config();
 
 const {svgToImage} = require('svg-to-image');
-const svg2gif = require('svg2gif');
+
 
 const { svgData } = require('./svg.cjs');
 
