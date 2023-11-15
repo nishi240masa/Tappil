@@ -94,7 +94,8 @@ app.post('/api/data', (req, res) => {
         ${key_data},
         ${enter_data},
         ${back_data},
-        ${sec_data}
+        ${sec_data},
+        ${score_data}
         )
         `;
     console.log(sql);
