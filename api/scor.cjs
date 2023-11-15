@@ -52,11 +52,11 @@ exports.gif_send = function (req) {
     }else if(req == 4){
         return "gif/forr_gif.gif";
     }else if(req == 3){
-        return "gif/three_gif.gif";
+        return "gif/samurai.gif";
     }else if(req == 2){
-        return "gif/haniwa.gif";
+        return "gif/tibiyayoi.gif";
     }else{
-        return "gif/saru.gif";
+        return "gif/tibisaru.gif";
     }
     
 }
