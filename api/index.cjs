@@ -8,6 +8,8 @@ require('dotenv').config();
 
 const svgToImage = require('svg-to-image');
 
+const { svgData } = require('./svg.cjs');
+
 const { Pool } = require('pg');
 const { createCanvas } = require('canvas');
 const SVG = require('svg-canvas');
