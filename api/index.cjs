@@ -186,6 +186,17 @@ app.get('/api/myscore', (req, res) => {
 
 });
 
+app.get('/gif', (req, res) => {
 
+fs.fdatasync('gif/five_gif.gif', (err, data) => {
+    if (err) { 
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }else{
+        res.header('Content-Type', 'image/gif');
+        res.status(200).send(data);
+    }
+});
+}) 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
