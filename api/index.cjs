@@ -129,11 +129,11 @@ app.get('/api/gif', (req, res) => {
     // dbからデータを取得する設定 nameがwwのデータを取得
     con.query("SELECT name,seconds,keycount FROM data;", function (err, result) {
         if (err) throw err;
-        console.log(result);
+        console.log(result.rows);
 
 
 
-        gif_num = gifn(result, user);
+        gif_num = gifn(result.rows, user);
 
         let gs = gif_send(gif_num);
 
