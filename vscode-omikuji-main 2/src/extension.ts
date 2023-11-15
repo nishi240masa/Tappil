@@ -23,7 +23,7 @@ const data = JSON.stringify({
     text: "text",
   });
 
-const url = "http://localhost:3000/api/data";
+const url = "https://tappil-web.onrender.com/api/data";
 
 let keyCount = 0;
 let BackCount = 0;
@@ -98,7 +98,7 @@ export function activate(context: vscode.ExtensionContext) {
                   "Content-Type": "application/json",
                 },
               };    
-            const request = http.request(url,datas, response => {
+            const request = https.request(url,datas, response => {
                 console.log(`statusCode: ${response.statusCode}`)
               
               })
