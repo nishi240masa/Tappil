@@ -1,6 +1,7 @@
 
 const { createCanvas } = require('canvas');
 const SVG = require('svg-canvas');
+const fs = require('fs'); 
 
 exports.svgData = function (req, user) {
   console.log("test_svg");
