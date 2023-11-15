@@ -81,6 +81,7 @@ app.post('/api/data', (req, res) => {
     let score_data = key_data / sec_data;
 
 
+    console.log(name_data);
 
 
     const sql = `INSERT INTO data (
