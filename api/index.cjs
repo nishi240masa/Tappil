@@ -167,7 +167,7 @@ app.get('/api/myscore', (req, res) => {
     let user = req.query.name;
 
     // dbからデータを取得する設定 nameがwwのデータを取得
-    con.query("SELECT * FROM data WHERE name = ?;", [user], function (err, result) {
+    con.query("SELECT * FROM data WHERE name = ?", [user], function (err, result) {
         if (err) throw err;
 
         console.log("svg_test");
