@@ -94,11 +94,11 @@ exports.svgData = function (req, user) {
       <rect width="100%" height="100%" fill="#f0f0f0"/>
 
       <!-- ユーザー名 -->
-      <text x="50" y="30" font-family="PixelMplus10-Regular" font-size="16" fill="black">User: ${user}</text>
+      <text x="30" y="30" font-family="PixelMplus10-Regular" font-size="16" fill="black">User: ${user}</text>
 
       <!-- スコア -->
       ${scores.map((score, index) => `
-        <text x="50" y="${60 + index * 30}" font-family="PixelMplus10-Regular" font-size="16" fill="black">${score.name}: ${score.value}</text>
+        <text x="30" y="${60 + index * 30}" font-family="PixelMplus10-Regular" font-size="16" fill="black">${score.name}: ${score.value}</text>
       `).join('')}
 
     </svg>
