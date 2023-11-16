@@ -13,6 +13,7 @@ exports.svgData = function (req, user) {
     let sec = [];
 
     console.log("test");
+    
 
     for (i = 0; i < req.rows.length; i++) {
 
@@ -27,7 +28,7 @@ exports.svgData = function (req, user) {
     console.log("MAX");
     console.log(scoreMax);
     console.log("MAX2");
-    console.log(sco[req.rows.length]);
+    console.log(sco[req.rows.length - 1]);
 
     keyco.sort((a, b) => a - b);
     keycountMax = keyco[0];
