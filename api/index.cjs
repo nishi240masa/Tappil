@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const { svgToImage } = require('svg-to-image');
 
-const { html2canvas } = require('html2canvas');
+const  html2canvas  = require('html2canvas');
 const { gif_js } = require('gif.js');
 
 const { svgData } = require('./svg.cjs');
@@ -185,20 +185,20 @@ app.get('/api/myscore', (req, res) => {
 
         let svg = svgData(result, user);
 
-        html2canvas(svg, { logging: true }).then(canvas => {
+        html2canvas(svg).then(canvas => {
             // キャプチャされたキャンバスをGIFに変換するためにgif.jsを使用
             const gif = new gif_js({ workers: 2, quality: 10 });
             gif.addFrame(canvas, { delay: 200 }); // 必要に応じて遅延を調整
-
+    
             // GIFをファイルに保存
-            gif.on('finished', function (blob) {
+            gif.on('finished', function(blob) {
                 const gifBuffer = Buffer.from(blob);
                 fs.writeFileSync('combined.gif', gifBuffer);
-
+    
                 // GIFをレスポンスで送信
                 res.sendFile('combined.gif', { root: __dirname });
             });
-
+    
             gif.render();
         });
 
