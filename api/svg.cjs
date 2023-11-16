@@ -1,8 +1,7 @@
 
 const {canvas } = require('canvas');
-const SVG = require('svg-canvas');
+
 const fs = require('fs'); 
-const { s } = require('@tauri-apps/api/app-5190a154');
 
 exports.svgData = function (req, user) {
   console.log("test_svg");
