@@ -56,8 +56,9 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "axios": "^1.6.1",
+    "axios": "^1.6.2",
     "http": "^0.0.1-security",
-    "https": "^1.0.0"
+    "https": "^1.0.0",
+    "node-fetch": "^3.3.2"
   }
 }
