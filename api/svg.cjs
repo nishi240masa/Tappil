@@ -88,7 +88,7 @@ exports.svgData = function (req, user) {
   
 
     const svgString =`
-    <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+    <svg width="250" height="200" xmlns="http://www.w3.org/2000/svg">
 
       <!-- 背景 -->
       <rect width="100%" height="100%" fill="#f0f0f0"/>
@@ -100,12 +100,6 @@ exports.svgData = function (req, user) {
       ${scores.map((score, index) => `
         <text x="50" y="${60 + index * 30}" font-family="Arial" font-size="16" fill="black">${score.name}: ${score.value}</text>
       `).join('')}
-
-      <foreignObject width="50%" height="100%" x="50%">
-      <div xmlns="http://www.w3.org/1999/xhtml" style="width:100%; height:100%; position:relative;">
-          <img src="https://tappil-web.onrender.com/api/gif?name=${user}" alt="GIF"  style="width:100%; height:100%; position:absolute; right:0;" />
-      </div>
-  </foreignObject>
 
     </svg>
   `;
