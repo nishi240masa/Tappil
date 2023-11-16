@@ -6,8 +6,10 @@ const { gifn, gif_send, mydata, bestsc } = require('./scor.cjs');
 
 require('dotenv').config();
 
-const {svgToImage} = require('svg-to-image');
+const { svgToImage } = require('svg-to-image');
 
+const { html2canvas } = require('html2canvas');
+const { gif_js } = require('gif.js');
 
 const { svgData } = require('./svg.cjs');
 
@@ -183,26 +185,27 @@ app.get('/api/myscore', (req, res) => {
 
         let svg = svgData(result, user);
 
-        const svgBuffer = Buffer.from(svg, 'utf-8');
-        try {
-            const image = svgToImage(svgBuffer, { format: 'gif', width: 400, height: 200 });
-            if (image && image.data) {
-                // GIFファイルを保存
-                fs.writeFileSync('combined.gif', image.data, 'base64');
-    
+        html2canvas(svg, { logging: true }).then(canvas => {
+            // キャプチャされたキャンバスをGIFに変換するためにgif.jsを使用
+            const gif = new gif_js({ workers: 2, quality: 10 });
+            gif.addFrame(canvas, { delay: 200 }); // 必要に応じて遅延を調整
+
+            // GIFをファイルに保存
+            gif.on('finished', function (blob) {
+                const gifBuffer = Buffer.from(blob);
+                fs.writeFileSync('combined.gif', gifBuffer);
+
                 // GIFをレスポンスで送信
                 res.sendFile('combined.gif', { root: __dirname });
-            } else {
-                res.status(500).send('SVGからGIFへの変換に失敗しました。');
-            }
-        } catch (error) {
-            console.error('SVGからGIFへの変換エラー:', error);
-            res.status(500).send('内部サーバーエラー');
-        }
-    // res.set('Content-Type', 'image/svg+xml');
-    // res.type('svg').send(svg);
-    
+            });
+
+            gif.render();
         });
+
+        // res.set('Content-Type', 'image/svg+xml');
+        // res.type('svg').send(svg);
+
+    });
 
 
 });
