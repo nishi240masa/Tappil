@@ -27,7 +27,6 @@ app.use(cors());
 // const gn = ('./scor.js');
 
 const mysql = require('mysql');
-const { s } = require('@tauri-apps/api/app-5190a154');
 
 
 
