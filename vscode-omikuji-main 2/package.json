@@ -1,4 +1,5 @@
 {
+  "publisher": "tapiokapan",
   "name": "vscode-omikuji",
   "displayName": "vscode-omikuji",
   "description": "Omikuji in VSCode.",
