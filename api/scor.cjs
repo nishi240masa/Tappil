@@ -57,7 +57,7 @@ exports.gif_send = function (req) {
     }else if(req == 2){
         return "gif/tibiyayoi.gif";
     }else{
-        return "gif/tibisaru.gif";
+        return "gif/tibisaru2.gif";
     }
     
 }
