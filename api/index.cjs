@@ -6,12 +6,7 @@ const { gifn, gif_send, mydata, bestsc } = require('./scor.cjs');
 
 require('dotenv').config();
 
-const { svgToImage } = require('svg-to-image');
-const sharp = require('sharp');
-const GIFEncoder = require('gifencoder');
 
-const html2canvas = require('html2canvas');
-const { gif_js } = require('gif.js');
 
 const { svgData } = require('./svg.cjs');
 
