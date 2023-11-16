@@ -1,7 +1,8 @@
 
-const { createCanvas } = require('canvas');
+const {canvas } = require('canvas');
 const SVG = require('svg-canvas');
 const fs = require('fs'); 
+const { s } = require('@tauri-apps/api/app-5190a154');
 
 exports.svgData = function (req, user) {
   console.log("test_svg");
@@ -36,6 +37,7 @@ exports.svgData = function (req, user) {
         scoreOll += req.rows[i].score;
     }
 
+    scoreOll_two =  typeof parseFloat(scoreOll.toFixed(2))
 
     const username = user || 'User';
 
@@ -45,7 +47,7 @@ exports.svgData = function (req, user) {
 
     const scoreValue3 = secondsMax || 'null';
 
-    const scoreValue4 = scoreOll || 'null';
+    const scoreValue4 = scoreOll_two || 'null';
 
     // const canvas = createCanvas(400, 200);
     // const ctx = canvas.getContext('2d');
