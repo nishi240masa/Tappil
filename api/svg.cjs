@@ -1,5 +1,5 @@
 
-const { s } = require('@tauri-apps/api/app-5190a154');
+
 const {canvas } = require('canvas');
 
 const fs = require('fs'); 
