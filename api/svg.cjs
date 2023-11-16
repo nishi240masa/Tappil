@@ -33,7 +33,7 @@ exports.svgData = function (req, user) {
     keyco.sort((a, b) => a - b);
     keycountMax = keyco[req.rows.length - 1];
 
-    sec.sort((a, b) => a.seconds - b.seconds);
+    sec.sort((a, b) => a - b);
 
     secondsMax = sec[req.rows.length - 1];
 
