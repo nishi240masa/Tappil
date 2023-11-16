@@ -1,4 +1,5 @@
 
+const { s } = require('@tauri-apps/api/app-5190a154');
 const {canvas } = require('canvas');
 
 const fs = require('fs'); 
@@ -23,6 +24,8 @@ exports.svgData = function (req, user) {
     }
     sco.sort((a, b) => a - b);
     scoreMax = sco[0];
+    console.log(scoreMax);
+    console.log(sco[req.rows.length]);
 
     keyco.sort((a, b) => a - b);
     keycountMax = keyco[0];
