@@ -36,7 +36,7 @@ exports.svgData = function (req, user) {
       scoreOll += parseFloat(req.rows[i].score);
     }
 
-    scoreOll_two =  typeof parseFloat(scoreOll.toFixed(2))
+    scoreOll_two =   parseFloat(scoreOll.toFixed(2))
 
     const username = user || 'User';
 
