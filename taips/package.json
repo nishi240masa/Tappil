@@ -1,9 +1,9 @@
 {
   "publisher": "tapiokapan",
-  "name": "vscode-omikuji",
-  "displayName": "vscode-omikuji",
-  "description": "Omikuji in VSCode.",
-  "version": "0.0.1",
+  "name": "taips",
+  "displayName": "vscode-taips",
+  "description": "taips in VSCode.",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.84.1"
   },

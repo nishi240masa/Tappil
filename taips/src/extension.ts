@@ -143,12 +143,12 @@ export function activate(context: vscode.ExtensionContext) {
                                 console.error(error);
                             }
 
-                                // 送信後にカウントをリセット
-                                name = "";
-                                keyCount = 0;
-                                BackCount = 0;
-                                enter = 0;
-                                totalCursorTimeInMilliseconds = 0;
+                            // 送信後にカウントをリセット
+                            name = "";
+                            keyCount = 0;
+                            BackCount = 0;
+                            enter = 0;
+                            totalCursorTimeInMilliseconds = 0;
 
 
                         }
