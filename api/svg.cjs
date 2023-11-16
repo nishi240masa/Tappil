@@ -24,18 +24,18 @@ exports.svgData = function (req, user) {
         sec.push(req.rows[i].seconds);
     }
     sco.sort((a, b) => a - b);
-    scoreMax = sco[0];
+    scoreMax = sco[req.rows.length - 1];
     console.log("MAX");
     console.log(scoreMax);
     console.log("MAX2");
     console.log(sco[req.rows.length - 1]);
 
     keyco.sort((a, b) => a - b);
-    keycountMax = keyco[0];
+    keycountMax = keyco[req.rows.length - 1];
 
     sec.sort((a, b) => a.seconds - b.seconds);
 
-    secondsMax = sec[0];
+    secondsMax = sec[req.rows.length - 1];
 
     let scoreOll = 0;
     for (i = 0; i < req.rows.length; i++) {
