@@ -7,8 +7,10 @@ const { gifn, gif_send, mydata, bestsc } = require('./scor.cjs');
 require('dotenv').config();
 
 const { svgToImage } = require('svg-to-image');
+const sharp = require('sharp');
+const GIFEncoder = require('gifencoder');
 
-const  html2canvas  = require('html2canvas');
+const html2canvas = require('html2canvas');
 const { gif_js } = require('gif.js');
 
 const { svgData } = require('./svg.cjs');
@@ -30,6 +32,7 @@ app.use(cors());
 // const gn = ('./scor.js');
 
 const mysql = require('mysql');
+const { s } = require('@tauri-apps/api/app-5190a154');
 
 
 
@@ -185,27 +188,52 @@ app.get('/api/myscore', (req, res) => {
 
         let svg = svgData(result, user);
 
-        html2canvas(svg).then(canvas => {
-            // キャプチャされたキャンバスをGIFに変換するためにgif.jsを使用
-            const gif = new gif_js({ workers: 2, quality: 10 });
-            gif.addFrame(canvas, { delay: 200 }); // 必要に応じて遅延を調整
-    
-            // GIFをファイルに保存
-            gif.on('finished', function(blob) {
-                const gifBuffer = Buffer.from(blob);
-                fs.writeFileSync('combined.gif', gifBuffer);
-    
-                // GIFをレスポンスで送信
-                res.sendFile('combined.gif', { root: __dirname });
+        function convertPngToGif() {
+            const encoder = new GIFEncoder(300, 200);
+            const canvas = createCanvas(300, 200);
+            const ctx = canvas.getContext('2d');
+        
+            const outputStream = fs.createWriteStream('output.gif');
+            encoder.createReadStream().pipe(outputStream);
+            encoder.start();
+            encoder.setRepeat(0);
+            encoder.setDelay(500); // 500ms delay between frames
+        
+            // PNG画像を読み込み
+            loadImage('output.png').then((image) => {
+                // 1つ目のフレームを追加
+                ctx.drawImage(image, 0, 0, 300, 200);
+                encoder.addFrame(ctx);
+        
+                // 2つ目のフレームを追加（必要に応じて繰り返す）
+        
+                // 最後にGIFを完成させる
+                encoder.finish();
+                console.log('GIF created');
+                res.status(200).send(output.gif);
             });
-    
-            gif.render();
+        }
+        
+        // SVGからPNGへの変換
+        const sharp = require('sharp');
+        
+        sharp(svg)
+            .png()
+            .toFile('output.png', (err, info) => {
+                if (err) {
+                    console.error(err);
+                } else {
+                    console.log('Image converted:', info);
+                    // PNGへの変換が完了したら、次のステップに進みます
+                    convertPngToGif();
+                }
+            });
+        
+
+            // res.set('Content-Type', 'image/svg+xml');
+            // res.type('svg').send(svg);
+
         });
-
-        // res.set('Content-Type', 'image/svg+xml');
-        // res.type('svg').send(svg);
-
-    });
 
 
 });
