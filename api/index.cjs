@@ -157,6 +157,7 @@ app.get('/api/gif', (req, res) => {
                 // レスポンスヘッダーのContent-Lengthに画像のサイズを設定することで、画像のサイズをブラウザに伝えることができる
                 res.header('Content-Length', data.length);
                 // レスポンスヘッダーのCache-Controlにno-cacheを設定することで、ブラウザがキャッシュをしないようにできる
+                res.header('Cache-Control', 'no-cache');
                 // res.header('Cache-Control', 'no-cache');
                 res.status(200).send(data);
 
