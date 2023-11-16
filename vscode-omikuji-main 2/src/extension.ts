@@ -5,7 +5,6 @@ import * as https from "https";
 import * as http from "http";
 
 
-let name ="";
 
 async function promptForName(name: string | undefined) {
     name = await vscode.window.showInputBox({
@@ -42,13 +41,26 @@ let enter = 0;
 let cursorTimer: NodeJS.Timeout | undefined = undefined;
 let totalCursorTimeInMilliseconds = 0;
 let isVsCodeActive = true; // VSCodeウィンドウがアクティブかどうかを保持する変数
+let name ="";
 
 
 const activeEditor = vscode.window.activeTextEditor;
 
 export function activate(context: vscode.ExtensionContext) {
     // この処理は、拡張機能がアクティブになったときに実行されます。
-    context.subscriptions.push(vscode.commands.registerCommand('extension.promptForName', promptForName));
+    context.subscriptions.push(
+        vscode.commands.registerCommand('extension.promptForName', async () => {
+            const result = await vscode.window.showInputBox({
+                prompt: 'Please enter your name',
+                placeHolder: 'Your Name'
+            });
+            if (result) {
+                name = result;
+                vscode.window.showInformationMessage(`Hello, ${name}!`);
+            } else {
+                vscode.window.showWarningMessage('No name entered.');
+            }
+        }));
 
     // この処理は、拡張機能がアクティブになったときに実行されます。
     context.subscriptions.push(
