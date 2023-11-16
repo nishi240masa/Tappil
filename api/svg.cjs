@@ -103,7 +103,7 @@ exports.svgData = function (req, user) {
 
      <foreignObject width="50%" height="100%" x="50%">
       <div xmlns="http://www.w3.org/1999/xhtml" style="width:100%; height:100%; position:relative;">
-          <img src="https://tappil-web.onrender.com/api/gif?name=${user}" alt="GIF"  style="width:100%; height:100%; position:absolute; right:0;" />
+          <image  xlink:href="https://tappil-web.onrender.com/api/gif?name=${user}" alt="GIF"  style="width:100%; height:100%; position:absolute; right:0;" />
       </div>
   </foreignObject> 
 
