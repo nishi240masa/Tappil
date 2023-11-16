@@ -24,7 +24,9 @@ exports.svgData = function (req, user) {
     }
     sco.sort((a, b) => a - b);
     scoreMax = sco[0];
+    console.log("MAX");
     console.log(scoreMax);
+    console.log("MAX2");
     console.log(sco[req.rows.length]);
 
     keyco.sort((a, b) => a - b);
