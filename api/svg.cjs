@@ -80,8 +80,7 @@ exports.svgData = function (req, user) {
     });
   
 
-    const svgString = document.createElement('div');
-    container.innerHTML =`
+    const svgString =`
     <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
 
       <!-- 背景 -->
