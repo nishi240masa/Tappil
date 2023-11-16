@@ -101,8 +101,10 @@ exports.svgData = function (req, user) {
         <text x="50" y="${60 + index * 30}" font-family="Arial" font-size="16" fill="black">${score.name}: ${score.value}</text>
       `).join('')}
 
-     <image width="50%" height="50%"  href="https://tappil-web.onrender.com/api/gif?name=${user}" />
-
+     <foreignObject width="50%" height="100%" x="50%">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="width:100%; height:100%; position:relative;">
+          <image  xlink:href="https://tappil-web.onrender.com/api/gif?name=${user}" alt="GIF"  style="width:100%; height:100%; position:absolute; right:0;" />
+      </div>
 
     </svg>
   `;
