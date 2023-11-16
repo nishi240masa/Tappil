@@ -183,7 +183,7 @@ app.get('/api/myscore', (req, res) => {
         let svg = svgData(result, user);
 
 
-        Ï
+        
             res.set('Content-Type', 'image/svg+xml');
             res.type('svg').send(svg);
     });
