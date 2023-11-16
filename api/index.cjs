@@ -188,52 +188,12 @@ app.get('/api/myscore', (req, res) => {
 
         let svg = svgData(result, user);
 
-        function convertPngToGif() {
-            const encoder = new GIFEncoder(300, 200);
-            const canvas = createCanvas(300, 200);
-            const ctx = canvas.getContext('2d');
-        
-            const outputStream = fs.createWriteStream('output.gif');
-            encoder.createReadStream().pipe(outputStream);
-            encoder.start();
-            encoder.setRepeat(0);
-            encoder.setDelay(500); // 500ms delay between frames
-        
-            // PNG画像を読み込み
-            loadImage('output.png').then((image) => {
-                // 1つ目のフレームを追加
-                ctx.drawImage(image, 0, 0, 300, 200);
-                encoder.addFrame(ctx);
-        
-                // 2つ目のフレームを追加（必要に応じて繰り返す）
-        
-                // 最後にGIFを完成させる
-                encoder.finish();
-                console.log('GIF created');
-                res.status(200).send(output.gif);
-            });
-        }
-        
-        // SVGからPNGへの変換
-        const sharp = require('sharp');
-        
-        sharp(svg)
-            .png()
-            .toFile('output.png', (err, info) => {
-                if (err) {
-                    console.error(err);
-                } else {
-                    console.log('Image converted:', info);
-                    // PNGへの変換が完了したら、次のステップに進みます
-                    convertPngToGif();
-                }
-            });
-        
 
-            // res.set('Content-Type', 'image/svg+xml');
-            // res.type('svg').send(svg);
+        Ï
+            res.set('Content-Type', 'image/svg+xml');
+            res.type('svg').send(svg);
+    });
 
-        });
 
 
 });
