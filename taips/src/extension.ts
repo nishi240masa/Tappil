@@ -66,6 +66,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.commands.registerCommand('vscode-Keys.Start', () => {
             // ウィンドウのフォーカス状態が変化したときに呼び出されるイベント
+            vscode.window.showInformationMessage(`たいぷず開始！！`);
             vscode.window.onDidChangeWindowState((windowState) => {
                 isVsCodeActive = windowState.focused; // ウィンドウがアクティブかどうかを更新
                 if (!isVsCodeActive) {
