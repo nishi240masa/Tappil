@@ -33,7 +33,7 @@ exports.svgData = function (req, user) {
 
     let scoreOll = 0;
     for (i = 0; i < req.rows.length; i++) {
-      scoreOll += Number(req.rows[i].score);
+      scoreOll += parseFloat(req.rows[i].score);
     }
 
     scoreOll_two =  typeof parseFloat(scoreOll.toFixed(2))
