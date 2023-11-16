@@ -101,7 +101,7 @@ exports.svgData = function (req, user) {
         <text x="50" y="${60 + index * 30}" font-family="Arial" font-size="16" fill="black">${score.name}: ${score.value}</text>
       `).join('')}
 
-     <image  xlink:href="https://tappil-web.onrender.com/api/gif?name=${user}" alt="GIF"  style="width:100%; height:100%; position:absolute; right:0;" />
+     <image width="50%" height="50%"  href="https://tappil-web.onrender.com/api/gif?name=${user}" />
 
 
     </svg>
