@@ -88,7 +88,7 @@ exports.svgData = function (req, user) {
   
 
     const svgString =`
-    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+    <svg width="220" height="200" xmlns="http://www.w3.org/2000/svg">
 
       <!-- 背景 -->
       <rect width="100%" height="100%" fill="#f0f0f0"/>
