@@ -18,15 +18,15 @@
     "commands": [
       {
         "command": "vscode-Keys.Start",
-        "title": "start!!"
+        "title": "taips:start!!"
       },
       {
         "command": "vscode-Keys.showKeyCount",
-        "title": "count"
+        "title": "taips:count"
       },
       {
         "command": "extension.promptForName",
-        "title": "name"
+        "title": "taips:name"
       }
     ]
   },
