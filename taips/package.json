@@ -1,9 +1,9 @@
 {
   "publisher": "tapiokapan",
   "name": "taips",
-  "displayName": "vscode-taips",
+  "displayName": "taips",
   "description": "taips in VSCode.",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.84.1"
   },
