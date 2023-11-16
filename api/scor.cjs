@@ -49,13 +49,13 @@ exports.gifn = function (req,user) {
 exports.gif_send = function (req) { 
 
     if(req == 5){
-        return "gif/robo.gif";
+        return "gif/robo2.gif";
     }else if(req == 4){
-        return "gif/gunjin.gif";
+        return "gif/gunjin2.gif";
     }else if(req == 3){
-        return "gif/samurai.gif";
+        return "gif/samurai2.gif";
     }else if(req == 2){
-        return "gif/tibiyayoi.gif";
+        return "gif/tibiyayoi2.gif";
     }else{
         return "gif/tibisaru2.gif";
     }
