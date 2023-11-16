@@ -91,7 +91,7 @@ exports.svgData = function (req, user) {
     <svg width="220" height="200" xmlns="http://www.w3.org/2000/svg">
 
       <!-- 背景 -->
-      <rect width="100%" height="100%" fill="#f0f0f0"/>
+      <rect width="100%" height="100%" fill="#fff"/>
 
       <!-- ユーザー名 -->
       <text x="30" y="30" font-family="PixelMplus10-Regular" font-size="16" fill="black">User: ${user}</text>
