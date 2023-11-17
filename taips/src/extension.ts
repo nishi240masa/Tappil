@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.env.openExternal(vscode.Uri.parse(url));
             }else{
                 vscode.window.showInformationMessage('エディタ開かない');
- shout
+
             }
  
         if(name === undefined){
@@ -65,7 +65,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   
             if(name === undefined){
- main
+
             const result = await vscode.window.showInputBox({
                 prompt: 'Please enter your name',
                 placeHolder: 'Your Name'
