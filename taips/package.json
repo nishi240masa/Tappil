@@ -28,6 +28,13 @@
         "command": "extension.promptForName",
         "title": "taips:name"
       }
+    ],
+      "keybindings": [
+        {
+          "command": "count",
+          "key": "ctrl+s", 
+          "mac": "cmd+s" 
+        }
     ]
   },
   "scripts": {
