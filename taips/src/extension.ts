@@ -43,7 +43,7 @@ let cursorTimer: NodeJS.Timeout | undefined = undefined;
 let totalCursorTimeInMilliseconds = 0;
 let isVsCodeActive = true; // VSCodeウィンドウがアクティブかどうかを保持する変数
 let name: string | undefined = undefined;
-
+let hasEnteredIfBlock = false;
 
 const activeEditor = vscode.window.activeTextEditor;
 
@@ -52,6 +52,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
 
         vscode.commands.registerCommand('extension.promptForName', async () => {
+            if(name === undefined){
             const result = await vscode.window.showInputBox({
                 prompt: 'Please enter your name',
                 placeHolder: 'Your Name'
@@ -62,27 +63,24 @@ export function activate(context: vscode.ExtensionContext) {
             } else {
                 vscode.window.showWarningMessage('No name entered.');
             }
+        }else{
+            vscode.window.showInformationMessage(`名前は${name}です`); 
+        }
         }),
-
-
-
-
 
         // この処理は、拡張機能がアクティブになったときに実行されます。
 
         vscode.commands.registerCommand('vscode-Keys.Start', () => {
-
+         
             console.log(name);
 
             if (name !== undefined) {
-                vscode.window.showInformationMessage(`たいぷず開始！！`);
+            vscode.window.showInformationMessage(`たいぷず開始！！`);
     
-        
-
             vscode.window.onDidChangeWindowState((windowState) => {
+
                 isVsCodeActive = windowState.focused; // ウィンドウがアクティブかどうかを更新
                 if (!isVsCodeActive) {
-                    // ウィンドウがアクティブでない場合、タイマーを停止
                     if (cursorTimer) {
                         clearInterval(cursorTimer);
                         cursorTimer = undefined;
@@ -113,6 +111,7 @@ export function activate(context: vscode.ExtensionContext) {
             // テキストが変更されたときに呼び出されるイベント
             const onDidChangeTextDocument = vscode.workspace.onDidChangeTextDocument((event) => {
                 const text = event.contentChanges[0]?.text;
+
                 if (text === 'a' || text === 'b' || text === 'c' || text === 'd' || text === 'e' || text === 'f' || text === 'g' || text === 'h' || text === 'i' || text === 'j' || text === 'k' || text === 'l' || text === 'm' || text === 'n' || text === 'o' || text === 'p' || text === 'q' || text === 'r' || text === 's' || text === 't' || text === 'u' || text === 'v' || text === 'w' || text === 'x' || text === 'y' || text === 'z' || text === 'A' || text === 'B' || text === 'C' || text === 'D' || text === 'E' || text === 'F' || text === 'G' || text === 'H' || text === 'I' || text === 'J' || text === 'K' || text === 'L' || text === 'M' || text === 'N' || text === 'O' || text === 'P' || text === 'Q' || text === 'R' || text === 'S' || text === 'T' || text === 'U' || text === 'V' || text === 'W' || text === 'X' || text === 'Y' || text === 'Z' || text === '1' || text === '2' || text === '3' || text === '4' || text === '5' || text === '6' || text === '7' || text === '8' || text === '9' || text === '0') {
                     keyCount++; // キーを押した回数をカウント
                     console.log(keyCount);
@@ -123,8 +122,13 @@ export function activate(context: vscode.ExtensionContext) {
                 if (text === '') {
                     BackCount++;  // バックスペースキーを押した回数をカウント
                 }
+                
             });
-        } else {
+        }
+        else if(name === true){
+            vscode.window.showInformationMessage(`名前を入力してください`);
+        }
+         else {
             vscode.window.showInformationMessage(`名前を入力してください`);
         }
 
@@ -140,7 +144,7 @@ export function activate(context: vscode.ExtensionContext) {
 
             const datas = {
                 "name": name,
-                "keycount": keyCount,
+                "keycount": keyCount,       
                 "entercount": enter,
                 "backcount": BackCount,
                 "seconds": seconds,
