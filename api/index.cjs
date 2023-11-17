@@ -6,7 +6,8 @@ const { gifn, gif_send, mydata, bestsc } = require('./scor.cjs');
 
 require('dotenv').config();
 
-
+const passport = require('passport');
+const session = require('express-session');
 
 const { svgData } = require('./svg.cjs');
 
@@ -28,19 +29,11 @@ app.use(cors());
 
 const mysql = require('mysql');
 
+app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
-// mysqlに接続する設定
-// const con = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'N04090411n%',
-//     database: 'keydata_db'
-// });
-// con.connect(function (err) {
-//     if (err) throw err;
-//     console.log('Connected');
-// });
 
 const con = new Pool({
     user: process.env.DB_USER,
@@ -69,6 +62,30 @@ con.query(`CREATE TABLE IF NOT EXISTS data (
 con.query('SET SESSION timezone TO "Asia/Tokyo"');
 // body-parserを使う設定
 app.use(bodyParser.json());
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+    done(null, obj);
+});
+
+app.get('/auth/github', passport.authenticate('github'));
+
+app.get('/login/conect', (req, res) => {
+    res.send('認証成功');
+
+});   
+
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  (req, res) => {
+    // 認証成功時の処理
+    res.redirect('/login/conect');
+  });
+
+  
 
 // postされたデータを受け取る設定
 app.post('/api/data', (req, res) => {
@@ -184,9 +201,9 @@ app.get('/api/myscore', (req, res) => {
         let svg = svgData(result, user);
 
 
-        
-            res.set('Content-Type', 'image/svg+xml');
-            res.type('svg').send(svg);
+
+        res.set('Content-Type', 'image/svg+xml');
+        res.type('svg').send(svg);
     });
 
 
