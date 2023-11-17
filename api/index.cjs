@@ -35,14 +35,6 @@ app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: tr
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new GitHubStrategy({
-    clientID: '2e7f80967e286fc1e950',
-    clientSecret: process.env.GITHUB_SECRET,
-    callbackURL: 'https://tappil-web.onrender.com/auth/github/callback'
-  }, (accessToken, refreshToken, profile, done) => {
-    // ユーザー情報をデータベースに保存などの処理を行う
-    return done(null, profile);
-  }));
 
 
 const con = new Pool({
@@ -73,6 +65,35 @@ con.query('SET SESSION timezone TO "Asia/Tokyo"');
 // body-parserを使う設定
 app.use(bodyParser.json());
 
+passport.use(new GitHubStrategy({
+    clientID: '2e7f80967e286fc1e950',
+    clientSecret: process.env.GITHUB_SECRET,
+    callbackURL: 'https://tappil-web.onrender.com/auth/github/callback'
+}, (accessToken, refreshToken, profile, done) => {
+    // 認証後の処理
+    console.log(profile);
+    console.log(profile.username);
+    console.log(profile.id);
+    console.log(profile.displayName);
+    console.log(profile.photos[0].value);
+    con.query(`
+    INSERT INTO users (id, name, display_name, avatar_url)
+     VALUES (
+        '${profile.id}',
+         '${profile.username}', 
+         '${profile.displayName}',
+          '${profile.photos[0].value}')
+           ON CONFLICT (id) DO UPDATE SET name = 
+           '${profile.username}', 
+           display_name = '${profile.displayName}',
+            avatar_url = '${profile.photos[0].value}'`
+            , (err, result) => {
+
+        return done(null, profile);
+    })
+}));
+
+
 passport.serializeUser((user, done) => {
     done(null, user);
 });
@@ -86,16 +107,16 @@ app.get('/auth/github', passport.authenticate('github'));
 app.get('/login/conect', (req, res) => {
     res.send('認証成功');
 
-});   
+});
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/' }),
-  (req, res) => {
-    // 認証成功時の処理
-    res.redirect('/login/conect');
-  });
+    passport.authenticate('github', { failureRedirect: '/' }),
+    (req, res) => {
+        // 認証成功時の処理
+        res.redirect('/login/conect');
+    });
 
-  
+
 
 // postされたデータを受け取る設定
 app.post('/api/data', (req, res) => {
