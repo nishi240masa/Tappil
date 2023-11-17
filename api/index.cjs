@@ -128,7 +128,14 @@ app.post('/api/data', (req, res) => {
     let back_data = req.body.backcount;
     let sec_data = req.body.seconds;
 
-    let score_data = key_data / sec_data;
+    let score_data = 0;
+    if (sec_data_data == 0) {
+         score_data = 0;
+    }else{
+        score_data = Math.floor((key_data - back_data) / sec_data);
+    }
+
+    console.log(score_data);
 
 
     console.log(name_data);
