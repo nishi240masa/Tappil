@@ -76,22 +76,10 @@ passport.use(new GitHubStrategy({
     console.log(profile.id);
     console.log(profile.displayName);
     console.log(profile.photos[0].value);
-    con.query(`
-    INSERT INTO users (id, name, display_name, avatar_url)
-     VALUES (
-        '${profile.id}',
-         '${profile.username}', 
-         '${profile.displayName}',
-          '${profile.photos[0].value}')
-           ON CONFLICT (id) DO UPDATE SET name = 
-           '${profile.username}', 
-           display_name = '${profile.displayName}',
-            avatar_url = '${profile.photos[0].value}'`
-            , (err, result) => {
 
         return done(null, profile);
     })
-}));
+);
 
 
 passport.serializeUser((user, done) => {
