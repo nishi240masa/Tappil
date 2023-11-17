@@ -34,6 +34,15 @@ app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: tr
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.use(new GitHubStrategy({
+    clientID: '2e7f80967e286fc1e950',
+    clientSecret: process.env.GITHUB_SECRET,
+    callbackURL: 'https://tappil-web.onrender.com/auth/github/callback'
+  }, (accessToken, refreshToken, profile, done) => {
+    // ユーザー情報をデータベースに保存などの処理を行う
+    return done(null, profile);
+  }));
+
 
 const con = new Pool({
     user: process.env.DB_USER,
