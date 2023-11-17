@@ -51,13 +51,13 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         
         vscode.commands.registerCommand('extension.promptForName', async () => {
-          /*  const activeEditor = vscode.window.activeTextEditor;
+            const activeEditor = vscode.window.activeTextEditor;
             if (activeEditor) {
-                const url = 'https://kenkoooo.com/atcoder/#/table/'; // ここにURLを入力
+                const url = 'https://tappil-web.onrender.com/auth/github'; // ここにURLを入力
                 vscode.env.openExternal(vscode.Uri.parse(url));
             }else{
                 vscode.window.showInformationMessage('エディタ開かない');
-            }*/
+            }
 
 
   
