@@ -71,10 +71,18 @@ passport.use(new GitHubStrategy({
     callbackURL: 'https://tappil-web.onrender.com/auth/github/callback'
 }, (accessToken, refreshToken, profile, done) => {
     // 認証後の処理
+    console.log('プロフィール');
     console.log(profile);
+    console.log("プロバイダー");
+    
+    console.log(profile.provider);
+    console.log("ユーザー名");
     console.log(profile.username);
+    console.log("id");
     console.log(profile.id);
+    console.log("表示名");
     console.log(profile.displayName);
+    console.log("写真");
     console.log(profile.photos[0].value);
 
         return done(null, profile);
