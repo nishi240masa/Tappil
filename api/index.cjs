@@ -35,14 +35,6 @@ app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: tr
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new GitHubStrategy({
-    clientID: '2e7f80967e286fc1e950',
-    clientSecret: process.env.GITHUB_SECRET,
-    callbackURL: 'https://tappil-web.onrender.com/auth/github/callback'
-  }, (accessToken, refreshToken, profile, done) => {
-    // ユーザー情報をデータベースに保存などの処理を行う
-    return done(null, profile);
-  }));
 
 
 const con = new Pool({
@@ -73,6 +65,33 @@ con.query('SET SESSION timezone TO "Asia/Tokyo"');
 // body-parserを使う設定
 app.use(bodyParser.json());
 
+passport.use(new GitHubStrategy({
+    clientID: '2e7f80967e286fc1e950',
+    clientSecret: process.env.GITHUB_SECRET,
+    callbackURL: 'https://tappil-web.onrender.com/auth/github/callback'
+}, (accessToken, refreshToken, profile, done) => {
+    // 認証後の処理
+    console.log('アクセストークン');
+    console.log(accessToken);
+    console.log('プロフィール');
+    console.log(profile);
+    console.log("プロバイダー");
+    
+    console.log(profile.provider);
+    console.log("ユーザー名");
+    console.log(profile.username);
+    console.log("id");
+    console.log(profile.id);
+    console.log("表示名");
+    console.log(profile.displayName);
+    console.log("写真");
+    console.log(profile.photos[0].value);
+
+        return done(null, profile);
+    })
+);
+
+
 passport.serializeUser((user, done) => {
     done(null, user);
 });
@@ -86,16 +105,16 @@ app.get('/auth/github', passport.authenticate('github'));
 app.get('/login/conect', (req, res) => {
     res.send('認証成功');
 
-});   
+});
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/' }),
-  (req, res) => {
-    // 認証成功時の処理
-    res.redirect('/login/conect');
-  });
+    passport.authenticate('github', { failureRedirect: '/' }),
+    (req, res) => {
+        // 認証成功時の処理
+        res.redirect('/login/conect');
+    });
 
-  
+
 
 // postされたデータを受け取る設定
 app.post('/api/data', (req, res) => {
