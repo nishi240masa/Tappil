@@ -5,6 +5,7 @@ const { gifn, gif_send, mydata, bestsc } = require('./scor.cjs');
 
 
 require('dotenv').config();
+const GitHubStrategy = require('passport-github').Strategy;
 
 const passport = require('passport');
 const session = require('express-session');
