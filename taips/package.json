@@ -32,8 +32,8 @@
       "keybindings": [
         {
           "command": "count",
-          "key": "ctrl+s", 
-          "mac": "cmd+s" 
+          "key": "ctrl+shift+c", 
+          "mac": "cmd+shift+c"
         }
     ]
   },
