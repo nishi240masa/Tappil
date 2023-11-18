@@ -5,6 +5,7 @@ const { gifn, gif_send, mydata, bestsc } = require('./scor.cjs');
 
 
 require('dotenv').config();
+const axios = require('axios');
 const GitHubStrategy = require('passport-github').Strategy;
 
 const passport = require('passport');
@@ -70,13 +71,14 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.GITHUB_SECRET,
     callbackURL: 'https://tappil-web.onrender.com/auth/github/callback'
 }, (accessToken, refreshToken, profile, done) => {
+    const accessToken = req.user.accessToken; // アクセストークン
     // 認証後の処理
     console.log('アクセストークン');
     console.log(accessToken);
     console.log('プロフィール');
     console.log(profile);
     console.log("プロバイダー");
-    
+
     console.log(profile.provider);
     console.log("ユーザー名");
     console.log(profile.username);
@@ -87,8 +89,8 @@ passport.use(new GitHubStrategy({
     console.log("写真");
     console.log(profile.photos[0].value);
 
-        return done(null, profile);
-    })
+    return done(null, profile);
+})
 );
 
 
@@ -115,6 +117,22 @@ app.get('/auth/github/callback',
     });
 
 
+async function getGitHubUserInfo(accessToken) {
+    try {
+        const response = await axios.get('https://api.github.com/user', {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+
+        const userData = response.data;
+        return userData;
+    } catch (error) {
+        console.error('GitHub API request error:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+}
+
 
 // postされたデータを受け取る設定
 app.post('/api/data', (req, res) => {
@@ -130,8 +148,8 @@ app.post('/api/data', (req, res) => {
 
     let score_data = 0;
     if (sec_data_data == 0) {
-         score_data = 0;
-    }else{
+        score_data = 0;
+    } else {
         score_data = Math.floor((key_data - back_data) / sec_data);
     }
 
