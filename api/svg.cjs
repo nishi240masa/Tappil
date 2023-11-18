@@ -92,7 +92,9 @@ exports.svgData = function (req, user) {
 
       <!-- 背景 -->
       <rect x="0.4" y="464.9" fill="#33221A" width="594.8" height="130.5"/>
-<rect x="0.4" fill="#FFFFFF" width="594.8" height="465.1"/>
+      <rect x="0.4" fill="#FFFFFF" width="594.8" height="465.1"/>
+      <polygon fill="#D2FF43" points="0,464.9 0,521.8 14.5,530.2 71.1,497.3 127.8,530.2 184.4,497.3 241,530.2 297.6,497.3 354.3,530.2 
+	410.9,497.3 467.5,530.2 524.1,497.3 580.8,530.2 595.3,521.8 595.3,464.9 "/>
 
       <!-- ユーザー名 -->
       <text x="30" y="30" font-family="PixelMplus10-Regular" font-size="16" fill="black">User: ${user}</text>
