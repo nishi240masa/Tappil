@@ -5,7 +5,7 @@
   "description": "taips in VSCode.",
   "version": "1.0.0",
   "engines": {
-    "vscode": "^1.84.1"
+    "vscode": "^1.8.1"
   },
   "categories": [
     "Other"
