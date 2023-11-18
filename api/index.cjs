@@ -71,7 +71,6 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.GITHUB_SECRET,
     callbackURL: 'https://tappil-web.onrender.com/auth/github/callback'
 }, (accessToken, refreshToken, profile, done) => {
-    const accessToken = req.user.accessToken; // アクセストークン
     // 認証後の処理
     console.log('アクセストークン');
     console.log(accessToken);
