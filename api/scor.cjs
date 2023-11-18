@@ -8,10 +8,10 @@ exports.gifn = function (req,user) {
     let gif_data = 0;
 
     // gifファイルの出力スコアの値
-    const level5 = 110;
-    const level4 = 70;
-    const level3 = 40;
-    const level2 = 10;
+    const level5 = 166;
+    const level4 = 124;
+    const level3 = 81;
+    const level2 = 51;
 
     console.log(req);
     for (i = 0; i < req.length; i++) {
