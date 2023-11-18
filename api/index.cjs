@@ -117,21 +117,6 @@ app.get('/auth/github/callback',
     });
 
 
-async function getGitHubUserInfo(accessToken) {
-    try {
-        const response = await axios.get('https://api.github.com/user', {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
-
-        const userData = response.data;
-        return userData;
-    } catch (error) {
-        console.error('GitHub API request error:', error.response ? error.response.data : error.message);
-        throw error;
-    }
-}
 
 
 // postされたデータを受け取る設定
